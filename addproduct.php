@@ -10,6 +10,7 @@
 require_once('header.php');
 require_once('connect.php');
 if(isset($_POST['btnAdd'])){
+    $shopid = $_POST['shopid'];
     $pname = $_POST['pname'];
     $pprice = $_POST['pprice'];
     $pinfo = $_POST['pinfo'];
@@ -19,13 +20,13 @@ if(isset($_POST['btnAdd'])){
     $imagname = str_replace('','-',$_FILES['pimage']['name']);
     $flag = move_uploaded_file($_FILES['pimage']['tmp_name'],'./img/'.$imagname);
     if($flag){
-    $sql = "INSERT INTO `product`(`pname`, `pprice`, `pinfo`, `pimage`, `pquan`, `pcatid`, `pdate`) 
-    VALUES (?,?,?,?,?,?,?)";
+    $sql = "INSERT INTO `product`(`shopid`,`pname`, `pprice`, `pinfo`, `pimage`, `pquan`, `pcatid`, `pdate`) 
+    VALUES (?,?,?,?,?,?,?,?)";
 
     $c = new Connect();
     $dblink = $c->connectToPDO();
     $re = $dblink->prepare($sql);
-    $valueArray = [$pname,$pprice,$pinfo,$imagname,$pquan,$pcatid,$pdate];
+    $valueArray = [$shopid,$pname,$pprice,$pinfo,$imagname,$pquan,$pcatid,$pdate];
     $stmt = $re->execute($valueArray);
     if($stmt) echo "Congrats";
 }
@@ -38,6 +39,12 @@ if(isset($_POST['btnAdd'])){
         <div class="container">
             <h2>More new products</h2>
             <form action="" name="formReg" method="POST" enctype="multipart/form-data">
+                <div class="row mb-3">
+                    <label for="username" class="col-lg-1">Shop ID:</label>
+                    <div class="col-lg-11">
+                        <input type="text" class="form-control" name="shopid">
+                    </div>
+                </div>
                 <div class="row mb-3">
                     <label for="username" class="col-lg-1">Product name:</label>
                     <div class="col-lg-11">
