@@ -6,9 +6,9 @@ class Connect{
     public $pass;
     public function __construct(){
         $this->server = "s29oj5odr85rij2o.cbetxkdyhwsb.us-east-1.rds.amazonaws.com";
-        $this->dbname = "c8y0zl3vq9dttndj";
-        $this->uname = "xu0ikq1s9eyu9w3b";
-        $this->pass = "k4prdcnlggyr0335";
+        $this->dbname = "k4prdcnlggyr0335";
+        $this->uname = "c8y0zl3vq9dttndj";
+        $this->pass = "xu0ikq1s9eyu9w3b";
     }
     function connectToMySQL():mysqli{
         $conn = new mysqli($this->server,$this->uname,$this->pass,$this->dbname);
